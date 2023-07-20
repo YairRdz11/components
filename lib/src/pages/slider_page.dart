@@ -23,6 +23,7 @@ class _SliderPageState extends State<SliderPage> {
           children: <Widget>[
             _createSlider(),
             _createCheckBox(),
+            _createSwitch(),
             Expanded(child: _createImage())
           ]
           ),
@@ -30,6 +31,19 @@ class _SliderPageState extends State<SliderPage> {
     );
   }
   
+  Widget _createSwitch() {
+    return SwitchListTile(
+      title: const Text('Bloquear Slider'),
+      value: _lockCheck, 
+      onChanged: (value) {
+        setState(() {
+          _lockCheck = value!;
+        });
+      }
+    );
+
+  }
+
   Widget _createCheckBox() {
     /*return Checkbox(
       value: _lockCheck, 
