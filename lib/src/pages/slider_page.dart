@@ -9,6 +9,7 @@ class SliderPage extends StatefulWidget {
 
 class _SliderPageState extends State<SliderPage> {
   double _valueSlider = 100.0;
+  bool _lockCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class _SliderPageState extends State<SliderPage> {
         child: Column(
           children: <Widget>[
             _createSlider(),
+            _createCheckBox(),
             Expanded(child: _createImage())
           ]
           ),
@@ -28,6 +30,24 @@ class _SliderPageState extends State<SliderPage> {
     );
   }
   
+  Widget _createCheckBox() {
+    /*return Checkbox(
+      value: _lockCheck, 
+      onChanged: (value) {
+        setState(() {
+          _lockCheck = value!;
+        });
+      });*/
+     return CheckboxListTile(
+      title: const Text('Bloquear Slider'),
+      value: _lockCheck, 
+      onChanged: (value) {
+        setState(() {
+          _lockCheck = value!;
+        });
+      });
+  }
+
   Widget _createSlider() {
     return Slider(
       activeColor: Colors.indigoAccent,
@@ -36,9 +56,11 @@ class _SliderPageState extends State<SliderPage> {
       value: _valueSlider,
       min: 10.0,
       max: 400.0,
-      onChanged: (value) {
+      onChanged: ( _lockCheck ) ? null :  (value) {
         setState(() {
-          _valueSlider = value;
+          setState(() {
+            _valueSlider = value;
+          });
         });
       }
     );
